@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Downloader</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Minimal Downloader</h1>
+
+    <form method="POST">
+        <input
+            type="text"
+            name="query"
+            placeholder="Song or video name"
+            required
+        >
+
+        <div class="row">
+            <select name="type">
+                <option value="mp3">MP3 (Audio)</option>
+                <option value="mp4">MP4 (Video)</option>
+            </select>
+
+            <select name="quality">
+                <option value="128">128</option>
+                <option value="192">192</option>
+                <option value="256">256</option>
+                <option value="360">360</option>
+                <option value="720">720</option>
+                <option value="1080">1080</option>
+            </select>
+        </div>
+
+        <button type="submit">Fetch</button>
+
+        <!-- Status bar -->
+        <div id="status-wrap">
+            <div id="status-bar"></div>
+            <span>Fetching…</span>
+        </div>
+    </form>
+
+    {% if message %}
+        <p class="msg">{{ message }}</p>
+    {% endif %}
+
+    {% if filename %}
+        <a class="download" href="/download/{{ filename }}">
+            Download file
+        </a>
+    {% endif %}
+</div>
+
+<script>
+    const form = document.querySelector("form");
+    const status = document.getElementById("status-wrap");
+
+    form.addEventListener("submit", () => {
+        status.style.display = "flex";
+    });
+</script>
+
+</body>
+</html>
